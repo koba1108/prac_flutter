@@ -1,4 +1,4 @@
-# tinder_curry
+# prac_flutter
 
 A new Flutter project.
 
