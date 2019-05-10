@@ -4,16 +4,28 @@ import 'pages/search.dart';
 import 'pages/create.dart';
 import 'pages/notifications.dart';
 import 'pages/account.dart';
+import 'store/index.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp(store: initAppState()));
+}
 
 class MyApp extends StatelessWidget {
+  final Store<AppState> store;
+
+  MyApp({Key key, this.store}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'App',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: App(),
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        title: 'App',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: App(),
+      )
     );
   }
 }
@@ -47,7 +59,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('こばばば'),
+        title: Text('タイトル'),
         leading: InkWell(
           child: Icon(Icons.menu),
           onTap: () {
@@ -93,7 +105,7 @@ class _AppState extends State<App> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.add),
-              title: Text('つくる'),
+              title: Text('インクリメント'),
               backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(

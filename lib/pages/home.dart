@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:prac_flutter/components/loader.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -31,16 +30,15 @@ class _State extends State<Home> {
   @override
   void initState() {
     super.initState();
-    if (data == null) {
-      this.getData();
-    }
   }
 
   @override
-  Widget build(BuildContext context){
-    return Scaffold(body: new Stack(
-        children: [
-          isLoading ? Loader() : ListView.builder(
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: RefreshIndicator(
+          onRefresh: this.getData,
+          child: ListView.builder(
+            // physics: const AlwaysScrollableScrollPhysics(),
             itemCount: data == null ? 0 : data.length,
             itemBuilder: (BuildContext context, int index) {
               return Card(
@@ -62,7 +60,7 @@ class _State extends State<Home> {
               );
             },
           ),
-       ]
-    ));
+        ),
+    );
   }
 }
