@@ -59,7 +59,12 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('タイトル'),
+        title: InkWell(
+          child: Text('タイトル'),
+          onTap: () {
+            print("click タイトル");
+          },
+        ),
         leading: InkWell(
           child: Icon(Icons.menu),
           onTap: () {
@@ -99,8 +104,8 @@ class _AppState extends State<App> {
               backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              title: Text('さがす'),
+              icon: Icon(Icons.map),
+              title: Text('現在地'),
               backgroundColor: Colors.blue,
             ),
             BottomNavigationBarItem(
